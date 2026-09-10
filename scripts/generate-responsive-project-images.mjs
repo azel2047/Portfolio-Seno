@@ -9,28 +9,14 @@ const repositoryRoot = path.resolve(scriptsDirectory, '..');
 const projectsDirectory = path.join(repositoryRoot, 'src', 'assets', 'projects');
 const outputDirectory = path.join(projectsDirectory, 'responsive');
 
-const previewWidths = [480, 768, 1200];
-const detailWidths = [1600];
+const previewWidths = [480, 768];
+const detailWidths = [];
 const projectConfigs = [
-    { id: 'abb-cynk-portal' },
-    { id: 'bachelors-thesis', detailWidths: [] },
-    {
-        id: 'equiniti-design-system',
-        sourceFilename: 'equiniti-design-system.webp',
-        previewLossless: true,
-    },
-    { id: 'equiniti-website' },
-    { id: 'help-and-support', detailWidths: [] },
-    { id: 'groupware-knowledge-platform' },
-    { id: 'interactive-3d-portfolio' },
-    { id: 'intouch', detailWidths: [] },
-    { id: 'it-services' },
-    { id: 'kvl-security-device', sourceFilename: 'kvl-security-device.webp' },
-    { id: 'masters-thesis' },
-    { id: 'onboarding-solution' },
-    { id: 'power-analyser', detailWidths: [] },
-    { id: 'shareowner-online', detailWidths: [] },
-    { id: 'taia-accelerator' },
+    { id: 'himati', detailWidths: [] },
+    { id: 'oscar-3', detailWidths: [] },
+    { id: 'vibeti', detailWidths: [] },
+    { id: 'uniborrow', detailWidths: [] },
+    { id: 'laundry-pro', detailWidths: [] },
 ];
 
 await fs.mkdir(outputDirectory, { recursive: true });

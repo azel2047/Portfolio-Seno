@@ -108,7 +108,7 @@ try {
     await world.ready;
     await yieldToMainThread();
 
-    if (import.meta.env.DEV) {
+    if (import.meta.env.DEV && window.location.hash.includes('debug')) {
         const { initDebugGui } = await import('./debug/initDebugGui');
         const debugGui = initDebugGui(world.getDebugTargets());
         import.meta.hot?.dispose(() => debugGui.destroy());

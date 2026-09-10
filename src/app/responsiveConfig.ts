@@ -221,7 +221,7 @@ const getResponsiveConfig = (
                     : TEXT_DESKTOP_SCALE_ARC_STRENGTH * desktopViewportProgress,
             relativeOffsetYFactor: isMobile ? -1 : 0,
             topAnchor: isMobile ? 0.35 : 0.3,
-            scrollDepthOffset: isMobile ? 4 : 0,
+            scrollDepthOffset: 0,
         },
         layout: {
             introTextWidth: interpolate(
@@ -418,13 +418,13 @@ const getResponsiveConfig = (
             ...MOBILE_CONTACT_CAMERA_CONFIG,
         },
         constellation: {
-            scale: mobileConstellationScale * 2.5,
-            position: [0, -0.4, -5],
+            scale: mobileConstellationScale * 1.9,
+            position: [0, 0.45, -5],
             clusterSpread: 4.9,
-            touchHitScale: 1.55,
+            touchHitScale: 1.8,
             boundaryHitScale: 1.35,
-            labelScale: 1.55,
-            fogScale: 1.35 * CONSTELLATION_FOG_SCALE_BOOST,
+            labelScale: 1.2,
+            fogScale: 1.2 * CONSTELLATION_FOG_SCALE_BOOST,
             fogSpreadScale: 1,
             selectedFocusX: 0,
             motionScale: 0,

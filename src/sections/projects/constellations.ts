@@ -2,9 +2,7 @@ import type { Constellation } from './constellationTypes';
 import { PORTFOLIO_CONSTELLATION_FOG_COLORS } from './portfolioConstellation';
 
 export const constellations: Constellation[] = [
-    { id: 'front-end', label: 'Front-end' },
-    { id: 'full-stack', label: 'Full-Stack' },
-    { id: 'back-end', label: 'Back-end' },
+    { id: 'full-stack', label: 'Full-Stack Developer' },
 ];
 
 export const getConstellationColorRgb = (constellationId: Constellation['id']): string => {

@@ -237,6 +237,8 @@ export class SceneContentSystem implements System {
         }
     }
 
+    private currentViewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1920;
+
     public setTextScale(value: number): void {
         this.textScale = value;
         for (const entity of this.morphVisualEntities) {
@@ -247,8 +249,13 @@ export class SceneContentSystem implements System {
     }
 
     public setViewportSize(width: number): void {
-        this.viewportScale = width < 480 ? 0.78 : width < 768 ? 0.88 : 1;
+        this.currentViewportWidth = width;
+        this.viewportScale = width < 480 ? 0.66 : width < 768 ? 0.82 : 1;
         this.setTextScale(this.textScale);
+        if (this.scrollTextObject) {
+            const scrollTextScale = width < 480 ? 0.72 : width < 768 ? 0.88 : 1.15;
+            this.scrollTextObject.scale.setScalar(scrollTextScale);
+        }
     }
 
     public setTextBloomStrengthScale(value: number): void {
@@ -281,7 +288,7 @@ export class SceneContentSystem implements System {
     public setScrollTextDepthOffset(value: number): void {
         this.scrollTextDepthOffset = value;
         if (this.scrollTextObject) {
-            this.scrollTextObject.position.z = value;
+            this.scrollTextObject.position.set(0, -4.5, -40 + value);
         }
     }
 
@@ -367,8 +374,15 @@ export class SceneContentSystem implements System {
         const particles = this.options.renderables.get(entity)?.object;
         if (particles instanceof THREE.Points) {
             this.scrollTextObject = particles;
-            particles.position.z = this.scrollTextDepthOffset;
+            particles.position.set(0, -4.5, -40 + this.scrollTextDepthOffset);
             particles.layers.enable(BLOOM_LAYER);
+            const scrollTextScale =
+                this.currentViewportWidth < 480
+                    ? 0.72
+                    : this.currentViewportWidth < 768
+                      ? 0.88
+                      : 1.15;
+            particles.scale.setScalar(scrollTextScale);
         }
     }
 

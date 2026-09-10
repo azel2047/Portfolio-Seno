@@ -201,17 +201,50 @@ export function createViewportTunnelParticlePositions(
 
 export function createTextMorphPositions(
     font: Font,
-    text: string,
+    text: string | readonly string[],
     cloudPositions: Float32Array,
 ): Float32Array {
     const count = cloudPositions.length / 3;
     const PERFOMANCE_EFFICIENT_SEGMENTS_COUNT = 8;
-    const textGeometry = new TextGeometry(text, {
-        font,
-        size: 2,
-        depth: 0.4,
-        curveSegments: PERFOMANCE_EFFICIENT_SEGMENTS_COUNT,
-    });
+    const lines = typeof text === 'string' ? text.split('\n') : text;
+    let textGeometry: THREE.BufferGeometry;
+    let intermediateGeometries: THREE.BufferGeometry[] = [];
+
+    if (lines.length <= 1) {
+        textGeometry = new TextGeometry(lines[0] ?? '', {
+            font,
+            size: 2,
+            depth: 0.4,
+            curveSegments: PERFOMANCE_EFFICIENT_SEGMENTS_COUNT,
+        });
+    } else {
+        const lineHeight = 3.2;
+        const lineGeometries: THREE.BufferGeometry[] = [];
+        for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
+            const line = lines[lineIndex];
+            const lineGeom = new TextGeometry(line, {
+                font,
+                size: 2,
+                depth: 0.4,
+                curveSegments: PERFOMANCE_EFFICIENT_SEGMENTS_COUNT,
+            });
+            lineGeom.computeBoundingBox();
+            const bounds = lineGeom.boundingBox;
+            const lineWidth = bounds ? bounds.max.x - bounds.min.x : 0;
+            const minX = bounds?.min.x ?? 0;
+            const yOffset = (lines.length - 1) * 0.5 * lineHeight - lineIndex * lineHeight;
+
+            lineGeom.translate(-minX - lineWidth * 0.5, yOffset, 0);
+            lineGeometries.push(lineGeom);
+        }
+        intermediateGeometries = lineGeometries;
+        const merged = mergeGeometries(lineGeometries);
+        if (!merged) {
+            throw new Error('Failed to merge text geometries');
+        }
+        textGeometry = merged;
+    }
+
     const samplerMaterial = new THREE.MeshBasicMaterial();
     const sampler = new MeshSurfaceSampler(new THREE.Mesh(textGeometry, samplerMaterial)).build();
     const positions = new Float32Array(cloudPositions.length);
@@ -232,7 +265,7 @@ export function createTextMorphPositions(
     geometry.center();
 
     for (let index = 0; index < positionAttribute.count; index += 1) {
-        positionAttribute.setZ(index, positionAttribute.getZ(index) + Math.random() * 0.4 - 0.2);
+        positionAttribute.setZ(index, positionAttribute.getZ(index) + Math.random() * 0.2 - 0.1);
     }
 
     const cloudAttribute = new THREE.BufferAttribute(cloudPositions, 3);
@@ -255,6 +288,7 @@ export function createTextMorphPositions(
 
     geometry.dispose();
     textGeometry.dispose();
+    intermediateGeometries.forEach((g) => g.dispose());
     samplerMaterial.dispose();
 
     return target;
@@ -313,10 +347,9 @@ export function createAmbientFloatingParticlesGeometry(count = 2000): THREE.Buff
 
 export function createFloatingTextParticleGeometry(
     regularFont: Font,
-    italicFont: Font,
+    _italicFont: Font,
     count = 2600,
 ): THREE.BufferGeometry {
-    const lineHeight = 3;
     const createTrackedLine = (
         text: string,
         font: Font,
@@ -364,16 +397,14 @@ export function createFloatingTextParticleGeometry(
     };
 
     const lineGeometries = [
-        ...createTrackedLine('scroll', italicFont, 3.2, 0.4, 8, 0.24, 0, -lineHeight),
-        ...createTrackedLine('TO DIVE IN', regularFont, 1.45, 0.5, 4, 0.28, 0.82, -lineHeight * 2),
+        ...createTrackedLine('PORTFOLIO', regularFont, 2.4, 0.42, 8, 0.24, 0, 0.7),
+        ...createTrackedLine('SCROLL TO DIVE IN', regularFont, 0.82, 0.32, 6, 0.18, 0.65, -1.4),
     ];
 
     const merged = mergeGeometries(lineGeometries);
     if (!merged) {
         throw new Error('Could not merge floating text geometries');
     }
-
-    merged.translate(0, -1.5, -40);
 
     const samplerMesh = new THREE.Mesh(
         merged,

@@ -1,7 +1,8 @@
 import responsiveManifest from '../../assets/projects/responsive/manifest.json';
 import type { ResponsiveImageSource } from '../../utils/assetLoaders';
 
-export const PROJECT_PREVIEW_IMAGE_SIZES = '(max-width: 767px) 0px, clamp(220px, 22vw, 320px)';
+export const PROJECT_PREVIEW_IMAGE_SIZES =
+    '(max-width: 767px) calc(100vw - 3.5rem), clamp(220px, 22vw, 320px)';
 export const PROJECT_DETAILS_IMAGE_SIZES =
     '(max-width: 767px) calc(100vw - 4.5rem), min(calc(42vw - 2rem), 44rem)';
 
@@ -71,8 +72,12 @@ const responsiveProjectImages = Object.fromEntries(
         const preview = createResponsiveImage(previewCandidates, entry.width, entry.height);
 
         const detailCandidates = getGeneratedCandidates(entry.id, entry.detailVariants);
-        if (entry.detailOriginal) {
-            detailCandidates.push(...getGeneratedCandidates(entry.id, [entry.detailOriginal]));
+        const detailOriginal =
+            'detailOriginal' in entry
+                ? (entry.detailOriginal as { filename: string; width: number } | undefined)
+                : undefined;
+        if (detailOriginal) {
+            detailCandidates.push(...getGeneratedCandidates(entry.id, [detailOriginal]));
         } else {
             const original = originalUrlsByFilename.get(`${entry.id}.png`);
             if (!original) {

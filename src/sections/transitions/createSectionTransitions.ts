@@ -87,6 +87,8 @@ export const createSectionTransitions = ({
         projectCueProgress = progress;
         isProjectsSectionActive = isActive;
         const shouldShow =
+            !config.isMobile &&
+            !config.isCompact &&
             isActive &&
             !hasProjectBeenSelected &&
             progress >= PROJECTS_TRANSITION.constellationRevealStart &&

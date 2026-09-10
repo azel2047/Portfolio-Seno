@@ -107,17 +107,38 @@ const motionAndRealTimeGraphicsSkills: PortfolioSkill[] = [
     { id: 'post-processing', label: 'Post-Processing' },
 ];
 
-const aiSkills: PortfolioSkill[] = [{ id: 'llm', label: 'LLM' }];
+const modernStackAndDevOpsSkills: PortfolioSkill[] = [
+    { id: 'laravel', label: 'Laravel' },
+    { id: 'inertia-js', label: 'Inertia.js' },
+    { id: 'flutter', label: 'Flutter' },
+    { id: 'dart', label: 'Dart' },
+    { id: 'php', label: 'PHP' },
+    { id: 'tailwind-css', label: 'Tailwind CSS' },
+    { id: 'docker', label: 'Docker' },
+    { id: 'nginx', label: 'Nginx' },
+    { id: 'laragon', label: 'Laragon' },
+    { id: 'mysql', label: 'MySQL' },
+    { id: 'clean-code', label: 'Clean Code' },
+    { id: 'scrollytelling', label: 'Scrollytelling' },
+    { id: 'oop', label: 'OOP' },
+    { id: 'data-structures', label: 'Algoritma & Struktur Data' },
+    { id: 'git', label: 'Git' },
+    { id: 'github', label: 'GitHub' },
+    { id: 'ui-ux-architecture', label: 'UI/UX Architecture' },
+    { id: 'inventory-system', label: 'Inventory System' },
+    { id: 'ticketing-system', label: 'Ticketing System' },
+    { id: 'on-demand-service', label: 'On-Demand Service' },
+];
 
 export const portfolioSkills: PortfolioSkill[] = [
     ...coreDisciplineSkills,
     ...fullstackSkills,
     ...frontendSkills,
     ...backendAndDataSkills,
+    ...modernStackAndDevOpsSkills,
     ...cloudCmsTestingAndDeliverySkills,
     ...architectureAndResearchSkills,
     ...iotAndSecuritySkills,
     ...searchAndObservabilitySkills,
     ...motionAndRealTimeGraphicsSkills,
-    ...aiSkills,
 ];
