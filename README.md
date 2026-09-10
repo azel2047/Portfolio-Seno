@@ -1,15 +1,15 @@
-<h1 align="center">Kamil Nowak — Interactive 3D Portfolio</h1>
+<h1 align="center">Ugroseno Dwi Prakastyo — Interactive 3D Portfolio</h1>
 
 <p align="center">
   A cinematic portfolio combining reliable engineering with motion, visual depth and real-time graphics.
 </p>
 
 <p align="center">
-  <a href="https://nowakkamil.com">Live website</a>
+  <a href="https://github.com/azel2047/Portfolio-Seno">GitHub Repository</a>
   ·
-  <a href="https://www.linkedin.com/in/nowakkamil">LinkedIn</a>
+  <a href="https://github.com/azel2047">GitHub Profile</a>
   ·
-  <a href="https://github.com/nowakkamil">GitHub</a>
+  <a href="mailto:azelxiteer@gmail.com">Contact Email</a>
 </p>
 
 <p align="center">
@@ -115,19 +115,18 @@ npm run preview    # preview the generated site
 
 The contact form uses Cloudflare Pages Functions, Turnstile and Resend. A production setup requires `VITE_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`, `RESEND_API_KEY`, `CONTACT_SENDER` and `CONTACT_RECIPIENT`. Visitor confirmation emails can be enabled with `SEND_VISITOR_CONFIRMATION=true`.
 
-## Deployment
-
-The primary version is served through Cloudflare Pages at [nowakkamil.com](https://nowakkamil.com/). The [GitHub Pages deployment](https://nowakkamil.github.io/) remains available as an alternate address, while the custom domain is canonical for search engines and public sharing.
-
 ## About me
 
-I am a senior full-stack developer specialising in **React, TypeScript and .NET**. I build robust applications across front end, back end and cloud infrastructure, and particularly enjoy transforming ambitious visual concepts into maintainable digital products.
+I am a Full-Stack & Mobile Developer specializing in **Laravel, React, Inertia.js, Flutter, Docker, and modern interactive web experiences**. I build resilient, high-performance web and mobile applications from concept through production deployment.
 
-My interest in Three.js, WebGL and digital motion draws on a background in fine-art photography and compositing — the point where technical problem-solving and visual experimentation meet.
+- **Email:** [azelxiteer@gmail.com](mailto:azelxiteer@gmail.com)
+- **Phone:** +62 857-1982-1547
+- **Location:** Depok, Jawa Barat, Indonesia
+- **GitHub:** [azel2047](https://github.com/azel2047)
 
 ## License
 
-Unless a separate licence file states otherwise, the source code, visual design, text, shaders, media and project assets are provided for evaluation and demonstration purposes. They may not be copied, redistributed or used as a template without permission. Third-party libraries and assets remain subject to their respective licences.
+Unless a separate licence file states otherwise, the source code, visual design, text, shaders, media and project assets are provided for evaluation and demonstration purposes. Third-party libraries and assets remain subject to their respective licences.
 
 <p align="center">
   <i>
